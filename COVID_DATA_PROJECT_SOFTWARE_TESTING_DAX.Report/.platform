@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "COVID_DATA_PROJECT_SOFTWARE_TESTING_DAX"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3c2a07c4-353c-4e1e-812d-c4617f4a6f94"
+  }
+}

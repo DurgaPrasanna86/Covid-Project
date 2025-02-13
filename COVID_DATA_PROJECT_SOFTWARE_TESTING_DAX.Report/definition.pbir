@@ -1,0 +1,9 @@
+{
+  "version": "4.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../COVID_DATA_PROJECT_SOFTWARE_TESTING_DAX.SemanticModel"
+    },
+    "byConnection": null
+  }
+}
