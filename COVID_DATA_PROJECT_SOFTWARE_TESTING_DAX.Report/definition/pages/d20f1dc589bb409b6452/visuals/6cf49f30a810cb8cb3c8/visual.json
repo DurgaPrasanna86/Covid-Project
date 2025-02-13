@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
+  "name": "6cf49f30a810cb8cb3c8",
+  "position": {
+    "x": 650,
+    "y": 0,
+    "z": 1000,
+    "height": 720,
+    "width": 630,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "map",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "COVID_DATA"
+                    }
+                  },
+                  "Property": "ZIP Code Location"
+                }
+              },
+              "queryRef": "COVID_DATA.ZIP Code Location",
+              "nativeQueryRef": "ZIP Code Location",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

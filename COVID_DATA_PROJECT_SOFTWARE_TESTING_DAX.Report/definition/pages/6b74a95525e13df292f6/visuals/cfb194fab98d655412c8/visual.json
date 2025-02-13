@@ -1,0 +1,165 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
+  "name": "cfb194fab98d655412c8",
+  "position": {
+    "x": 9.6365133513704269,
+    "y": 0,
+    "z": 0,
+    "height": 719.9852118238191,
+    "width": 602.97040684289243,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "areaChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "COVID_DATA"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "Week Start"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Year"
+                }
+              },
+              "queryRef": "COVID_DATA.Week Start.Variation.Date Hierarchy.Year",
+              "nativeQueryRef": "Week Start Year",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "COVID_DATA"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "Week Start"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Quarter"
+                }
+              },
+              "queryRef": "COVID_DATA.Week Start.Variation.Date Hierarchy.Quarter",
+              "nativeQueryRef": "Week Start Quarter",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "COVID_DATA"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "Week Start"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Month"
+                }
+              },
+              "queryRef": "COVID_DATA.Week Start.Variation.Date Hierarchy.Month",
+              "nativeQueryRef": "Week Start Month",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "COVID_DATA"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "Week Start"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Day"
+                }
+              },
+              "queryRef": "COVID_DATA.Week Start.Variation.Date Hierarchy.Day",
+              "nativeQueryRef": "Week Start Day",
+              "active": false
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "COVID_DATA"
+                    }
+                  },
+                  "Property": "Total Tests"
+                }
+              },
+              "queryRef": "COVID_DATA.Total Tests",
+              "nativeQueryRef": "Total Tests"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "COVID_DATA"
+                        }
+                      },
+                      "Property": "Population"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(COVID_DATA.Population)",
+              "nativeQueryRef": "Sum of Population"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

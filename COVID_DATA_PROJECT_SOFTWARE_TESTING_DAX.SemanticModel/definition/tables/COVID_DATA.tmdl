@@ -1,0 +1,308 @@
+table COVID_DATA
+	lineageTag: 0fcb6084-9619-4504-9869-1cf9fb247e23
+
+	measure 'Total Cases' = SUM('COVID_DATA'[Cases - Weekly])
+		formatString: 0
+		lineageTag: 4b8100b0-e0e0-4345-a867-395988eb7498
+
+	measure 'Total Deaths' = SUM('COVID_DATA'[Deaths - Weekly])
+		formatString: 0
+		lineageTag: 1d05d8de-e568-4eca-800b-93c9c60f1503
+
+	measure 'Positive Test Rate Weekly' = ```
+			
+			AVERAGE('COVID_DATA'[Percent Tested Positive - Weekly])
+			
+			```
+		lineageTag: 0f774bac-7db9-48bc-93e9-73c5669a43bb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Tests' = ```
+			SUM('COVID_DATA'[Tests - Weekly])
+			
+			```
+		formatString: 0
+		lineageTag: e9e96325-ce9b-465c-93fd-8a16f9a5399d
+
+	measure 'Case Fatality Rate' =
+			
+			DIVIDE(SUM('COVID_DATA'[Deaths - Weekly]), SUM('COVID_DATA'[Cases - Weekly]), 0)
+		lineageTag: c8050eab-9b8b-41e4-821e-326ddd10114d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Rolling Avg Cases' = ```
+			
+			CALCULATE(
+			    AVERAGE('COVID_DATA'[Cases - Weekly]),
+			    DATESINPERIOD('COVID_DATA'[Week Start], LASTDATE('COVID_DATA'[Week Start]), -7, DAY)
+			)
+			
+			```
+		lineageTag: 9ea670d5-e296-4dcd-b79a-1b4711bf91a6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Test to Case Ratio' = ```
+			
+			DIVIDE(SUM('COVID_DATA'[Tests - Weekly]), SUM('COVID_DATA'[Cases - Weekly]), 0)
+			
+			```
+		lineageTag: 70727c2a-ce3e-4c27-945a-c2b44cf4e5eb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Mortality Rate' = ```
+			
+			DIVIDE(SUM('COVID_DATA'[Deaths - Cumulative]), SUM('COVID_DATA'[Cases - Cumulative]), 0)
+			
+			```
+		lineageTag: e0e0214d-e39f-4e87-981f-b4ab3114d85d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cases Per 100K' = ```
+			
+			DIVIDE(SUM('COVID_DATA'[Cases - Weekly]) * 100000, SUM('COVID_DATA'[Population]), 0)
+			
+			```
+		lineageTag: ff7c8b82-bd4d-43ce-a984-78b689eb22f8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Death Rate Change' = ```
+			
+			VAR PrevWeek = CALCULATE(SUM('COVID_DATA'[Death Rate - Weekly]), PREVIOUSDAY('COVID_DATA'[Week Start]))
+			RETURN 
+			IF(PrevWeek = 0, BLANK(), (SUM('COVID_DATA'[Death Rate - Weekly]) - PrevWeek) / PrevWeek)
+			
+			```
+		lineageTag: 29f7497b-b452-4ed2-8a58-b41b42a52f55
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Measure = ```
+			"if costomer failed to access ask him to try again in some time" 
+			```
+		lineageTag: 61fa20c3-e38d-4212-bdf0-3a9bc356f64f
+
+	column 'ZIP Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: 691f6dfd-1cce-4cbd-a45b-d2920a4b6fb9
+		summarizeBy: count
+		sourceColumn: ZIP Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 33921969-38f7-46ea-81a4-10a1065bf167
+		summarizeBy: sum
+		sourceColumn: Week Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Start'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 67005821-56ad-4771-8c5a-e7d59e78d2b5
+		summarizeBy: none
+		sourceColumn: Week Start
+
+		variation Variation
+			isDefault
+			relationship: 99135a1a-da80-4ccf-91f6-7f037b9bad47
+			defaultHierarchy: LocalDateTable_2b39f5ae-388d-45c1-affc-cf2e31fcadaa.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Week End'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 652f85d7-f6b5-4c89-8e1e-2cbff54a6c33
+		summarizeBy: none
+		sourceColumn: Week End
+
+		variation Variation
+			isDefault
+			relationship: 501a5547-81c5-4ae5-8fd3-58753a517ac8
+			defaultHierarchy: LocalDateTable_f3dc05a2-5ac4-474d-ab78-13eb958fc302.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Cases - Weekly'
+		dataType: int64
+		formatString: 0
+		lineageTag: 563f6782-3272-4cad-80e1-2ebc69655670
+		summarizeBy: sum
+		sourceColumn: Cases - Weekly
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cases - Cumulative'
+		dataType: int64
+		formatString: 0
+		lineageTag: 7a61df92-016e-4652-9f56-b04c55024ee4
+		summarizeBy: sum
+		sourceColumn: Cases - Cumulative
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Case Rate - Weekly'
+		dataType: int64
+		formatString: 0
+		lineageTag: f04764ff-78a5-4a85-ac1e-dcc8e297a1c7
+		summarizeBy: sum
+		sourceColumn: Case Rate - Weekly
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Case Rate - Cumulative'
+		dataType: double
+		lineageTag: 4ab8a8dd-fd51-42a1-bb3d-c04938d3b559
+		summarizeBy: sum
+		sourceColumn: Case Rate - Cumulative
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Tests - Weekly'
+		dataType: int64
+		formatString: 0
+		lineageTag: 90fd865d-d59c-42b6-9e7f-0e77daeb851d
+		summarizeBy: sum
+		sourceColumn: Tests - Weekly
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tests - Cumulative'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ca1d857-cdf6-4ea2-89f4-c5102dbf8bfe
+		summarizeBy: sum
+		sourceColumn: Tests - Cumulative
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Test Rate - Weekly'
+		dataType: int64
+		formatString: 0
+		lineageTag: d5a81608-6040-4778-acce-1e2ac6328cab
+		summarizeBy: sum
+		sourceColumn: Test Rate - Weekly
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Test Rate - Cumulative'
+		dataType: double
+		lineageTag: 5446e543-7584-4fc5-b30d-816617ada137
+		summarizeBy: sum
+		sourceColumn: Test Rate - Cumulative
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Percent Tested Positive - Weekly'
+		dataType: double
+		lineageTag: 7f5a132b-056b-42d6-9a7c-3f162e06ab4c
+		summarizeBy: sum
+		sourceColumn: Percent Tested Positive - Weekly
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Percent Tested Positive - Cumulative'
+		dataType: double
+		lineageTag: fd185e41-451b-41eb-839f-9ed8c34e1330
+		summarizeBy: sum
+		sourceColumn: Percent Tested Positive - Cumulative
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Deaths - Weekly'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1507c958-07a7-48fe-9fed-34dc88e5081f
+		summarizeBy: sum
+		sourceColumn: Deaths - Weekly
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deaths - Cumulative'
+		dataType: int64
+		formatString: 0
+		lineageTag: 641912ed-ebe2-4e05-ad3a-90d0ad615255
+		summarizeBy: sum
+		sourceColumn: Deaths - Cumulative
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Death Rate - Weekly'
+		dataType: double
+		lineageTag: 2e6d02d1-c22e-4528-94e6-5b00ed640837
+		summarizeBy: sum
+		sourceColumn: Death Rate - Weekly
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Death Rate - Cumulative'
+		dataType: double
+		lineageTag: cdec4d87-51bf-4e26-b403-ab026385bf6b
+		summarizeBy: sum
+		sourceColumn: Death Rate - Cumulative
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Population
+		dataType: int64
+		formatString: 0
+		lineageTag: be3895d9-0c2f-4d44-a330-172451144362
+		summarizeBy: sum
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Row ID'
+		dataType: string
+		lineageTag: 43880905-9531-4fec-8763-c8fb0f75c4af
+		summarizeBy: none
+		sourceColumn: Row ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ZIP Code Location'
+		dataType: string
+		lineageTag: 0d92a489-224c-4f60-883b-b0e1b54e8fae
+		summarizeBy: none
+		sourceColumn: ZIP Code Location
+
+		annotation SummarizationSetBy = Automatic
+
+	partition COVID_DATA = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\vamsi\OneDrive\Desktop\COVID_DATA.csv"),[Delimiter=",", Columns=21, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ZIP Code", Int64.Type}, {"Week Number", Int64.Type}, {"Week Start", type date}, {"Week End", type date}, {"Cases - Weekly", Int64.Type}, {"Cases - Cumulative", Int64.Type}, {"Case Rate - Weekly", Int64.Type}, {"Case Rate - Cumulative", type number}, {"Tests - Weekly", Int64.Type}, {"Tests - Cumulative", Int64.Type}, {"Test Rate - Weekly", Int64.Type}, {"Test Rate - Cumulative", type number}, {"Percent Tested Positive - Weekly", type number}, {"Percent Tested Positive - Cumulative", type number}, {"Deaths - Weekly", Int64.Type}, {"Deaths - Cumulative", Int64.Type}, {"Death Rate - Weekly", type number}, {"Death Rate - Cumulative", type number}, {"Population", Int64.Type}, {"Row ID", type text}, {"ZIP Code Location", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

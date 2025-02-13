@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
+  "name": "1ceafb882a011eee159d",
+  "position": {
+    "x": 594.71053825600347,
+    "y": 41.299342934444688,
+    "z": 0,
+    "height": 678.68586888937443,
+    "width": 685.56909271178188,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "COVID_DATA"
+                    }
+                  },
+                  "Property": "ZIP Code"
+                }
+              },
+              "queryRef": "COVID_DATA.ZIP Code",
+              "nativeQueryRef": "ZIP Code",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "COVID_DATA"
+                    }
+                  },
+                  "Property": "Positive Test Rate Weekly"
+                }
+              },
+              "queryRef": "COVID_DATA.Positive Test Rate Weekly",
+              "nativeQueryRef": "Positive Test Rate Weekly"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "COVID_DATA"
+                  }
+                },
+                "Property": "Positive Test Rate Weekly"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

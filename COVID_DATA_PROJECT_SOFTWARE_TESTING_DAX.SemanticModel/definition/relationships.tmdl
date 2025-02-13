@@ -1,0 +1,10 @@
+relationship 99135a1a-da80-4ccf-91f6-7f037b9bad47
+	joinOnDateBehavior: datePartOnly
+	fromColumn: COVID_DATA.'Week Start'
+	toColumn: LocalDateTable_2b39f5ae-388d-45c1-affc-cf2e31fcadaa.Date
+
+relationship 501a5547-81c5-4ae5-8fd3-58753a517ac8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: COVID_DATA.'Week End'
+	toColumn: LocalDateTable_f3dc05a2-5ac4-474d-ab78-13eb958fc302.Date
+
